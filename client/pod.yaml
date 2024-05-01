@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2024-04-15T01:54:32Z"
+  labels:
+    app: cab230-react-pod
+  name: cab230-react-pod
+spec:
+  containers:
+  - args:
+    - nginx
+    - -g
+    - daemon off;
+    env:
+    - name: TERM
+      value: xterm
+    image: ghcr.io/apscandy/cab230-react:latest
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "100m"
+      limits:
+        memory: "128Mi"
+        cpu: "200m"
+    name: cab230-react
+    ports:
+    - containerPort: 80
+      hostPort: 9000
+    stdin: true
+    tty: true

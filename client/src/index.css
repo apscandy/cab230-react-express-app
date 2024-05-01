@@ -1,0 +1,49 @@
+:root {
+  --main-color: #ff6000;
+  --second-color: #ffa559;
+  --tertiary-color: #ffe6c7;
+  --base-color: #454545;
+}
+
+.custom-color {
+  background-color: var(--main-color);
+}
+
+.btn-outline-success {
+  color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.btn-outline-success:hover {
+  color: var(--main-color);
+  background-color: var(--tertiary-color);
+  border-color: var(--main-color);
+}
+
+.btn-outline-success:focus {
+  color: #fff;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.btn-outline-success:focus-visible {
+  color: #fff;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.btn-outline-success.btn:active {
+  color: #fff;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.show.btn-outline-success.btn {
+  color: #fff;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+.select-box-list{
+
+min-width: 200px;
+}

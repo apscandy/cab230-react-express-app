@@ -1,0 +1,15 @@
+FROM docker.io/node:20-slim AS build
+
+LABEL org.opencontainers.image.source https://github.com/apscandy/CAB230-server
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD [ "node", "index.js"]
