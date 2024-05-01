@@ -22,7 +22,6 @@ add-frontend:
 build-image: add-frontend
 	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f containerfile
 
-
 run-image:
 	${CONTAINER_RUNTIME} run --name=${CONTAINER_NAME} -d -p 8080:3000/tcp ${LABEL}
 
@@ -31,7 +30,7 @@ stop-image:
 	${CONTAINER_RUNTIME} rm ${CONTAINER_NAME}
 
 
-push-image: build-image-fresh
+push-image: build-image
 	${CONTAINER_RUNTIME} push ${LABEL}:${TAG}
 
 
