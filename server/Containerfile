@@ -1,6 +1,6 @@
 FROM docker.io/node:20-slim AS build
 
-LABEL org.opencontainers.image.source https://github.com/apscandy/CAB230-server
+LABEL org.opencontainers.image.source=https://github.com/apscandy/cab230-react-express-app
 
 WORKDIR /app
 

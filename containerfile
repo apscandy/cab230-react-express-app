@@ -1,4 +1,4 @@
-FROM node:bookworm-slim AS frontend
+FROM docker.io/node:bookworm-slim AS frontend
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ RUN npm run build
 
 FROM node:bookworm-slim AS backend
 
-LABEL org.opencontainers.image.source https://github.com/apscandy/CAB230-server
+LABEL org.opencontainers.image.source=https://github.com/apscandy/cab230-react-express-app
 
 ENV NODE_ENV production
 

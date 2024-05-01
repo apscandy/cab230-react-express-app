@@ -12,7 +12,7 @@ RUN npm run build
 
 FROM docker.io/nginx:latest
 
-LABEL org.opencontainers.image.source https://github.com/apscandy/assignment_2
+LABEL org.opencontainers.image.source=https://github.com/apscandy/cab230-react-express-app
 
 LABEL maintainer="n11270179@qut.edu.au"
 

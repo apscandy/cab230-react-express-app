@@ -2,7 +2,7 @@ CONTAINER_RUNTIME=podman
 LABEL=ghcr.io/apscandy/cab230-express
 TAG=latest
 SBOM_FILE=sbom.json
-CONTAINER_NAME=express-test
+CONTAINER_NAME=cab230-express
 
 .DEFAULT_GOAL := build-image
 .PHONY: run build preview

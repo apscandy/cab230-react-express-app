@@ -1,8 +1,8 @@
 CONTAINER_RUNTIME=podman
-LABEL=ghcr.io/apscandy/cab230-express-react
+LABEL=ghcr.io/apscandy/cab230-react-express-app
 TAG=latest
 SBOM_FILE=sbom.json
-CONTAINER_NAME=express-react-test
+CONTAINER_NAME=cab230-fullstack
 
 .DEFAULT_GOAL := build-image
 .PHONY: run build
@@ -16,7 +16,7 @@ build-image:
 	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f containerfile
 	${CONTAINER_RUNTIME} image prune -f
 
-run-image: build-image
+run-image:
 	${CONTAINER_RUNTIME} run --name=${CONTAINER_NAME} -d -p 8080:3000/tcp ${LABEL}
 
 stop-image:

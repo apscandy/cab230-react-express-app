@@ -2,7 +2,7 @@ CONTAINER_RUNTIME=podman
 LABEL=ghcr.io/apscandy/cab230-react
 TAG=latest
 SBOM_FILE=sbom.json
-CONTAINER_NAME=react-test
+CONTAINER_NAME=cab230-react
 
 .DEFAULT_GOAL := build
 .PHONY: run build preview
