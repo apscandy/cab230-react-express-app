@@ -13,7 +13,7 @@ cve-check:
 	grype dir:.
 
 build-image: 
-	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f containerfile
+	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f dockerfile
 	${CONTAINER_RUNTIME} image prune -f
 
 run-image:

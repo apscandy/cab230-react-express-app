@@ -25,10 +25,10 @@ preview: build
 	npm run preview
 
 build-image: build
-	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f containerfile
+	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f dockerfile
 
 build-image-fresh:
-	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f build.containerfile
+	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f build.dockerfile
 	${CONTAINER_RUNTIME} image prune -f
 
 run-image:

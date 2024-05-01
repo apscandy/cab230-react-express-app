@@ -20,7 +20,7 @@ add-frontend:
 	cp -r ../client/dist . 
 
 build-image: add-frontend
-	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f containerfile
+	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f dockerfile
 
 run-image:
 	${CONTAINER_RUNTIME} run --name=${CONTAINER_NAME} -d -p 8080:3000/tcp ${LABEL}
