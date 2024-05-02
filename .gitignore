@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 *.zip
 sbom.json
+# .database.env
+# .secrets.env
