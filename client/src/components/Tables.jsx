@@ -1,7 +1,7 @@
 import Table from "react-bootstrap/Table";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function VolcanoTables({ data }) {
   const itemsPerPage = 10;
@@ -34,6 +34,12 @@ function VolcanoTables({ data }) {
     }
     return buttons;
   };
+
+  // if the data passed to the component changes reset to default value 
+  // to avoid a bug in the front end where the page number is still set but there is no page number corresponding to it 
+  useEffect(()=>{
+    setCurrentPage(1)
+  },[data])
 
   // Calculate the total number of pages needed to display all items in the data array.
   // We divide the total number of items in the data array by the number of items per page.
