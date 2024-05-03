@@ -1,10 +1,12 @@
-FROM docker.io/node:20-slim AS build
+FROM docker.io/node:22-bullseye-slim AS build
 
 LABEL org.opencontainers.image.source=https://github.com/apscandy/cab230-react-express-app
 
 WORKDIR /app
 
 COPY package*.json ./
+
+# RUN openssl genrsa -out private.pem 4096 && openssl rsa -in private.pem -pubout -out public.pem
 
 RUN npm install
 
