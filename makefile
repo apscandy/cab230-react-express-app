@@ -17,8 +17,8 @@ DATABASE_CONTAINER_NAME=cab230-mysql-database
 .PHONY: run build
 
 build: 
-	podman build -t ${CLIENT_LABEL}:${TAG} -f client/dockerfile
-	podman build -t ${SERVER_LABEL}:${TAG} -f server/dockerfile --build-arg=PORT=3000 --build-arg=STAGE=prod
+	podman build -t ${CLIENT_LABEL}:${TAG} -f client/build.dockerfile
+	podman build -t ${SERVER_LABEL}:${TAG} -f server/build.dockerfile
 	podman build -t ${DATABASE_LABEL}:${TAG} -f database/dockerfile
 	podman image prune -f
 
