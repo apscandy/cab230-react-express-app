@@ -51,6 +51,9 @@ pod-run: build-all-image
 	podman run --pod ${PODMAN_POD_NAME} --name=${SERVER_CONTAINER_NAME} -d ${SERVER_LABEL}
 	podman run --pod ${PODMAN_POD_NAME} --name=${DATABASE_CONTAINER_NAME} -d ${DATABASE_LABEL}
 
+pod-run-kube:
+	podman play kube local-pods.yaml
+
 pod-stop:
 	podman pod stop ${PODMAN_POD_NAME}
 	podman pod rm ${PODMAN_POD_NAME}
