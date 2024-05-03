@@ -57,3 +57,9 @@ pod-run-kube:
 pod-stop:
 	podman pod stop ${PODMAN_POD_NAME}
 	podman pod rm ${PODMAN_POD_NAME}
+
+push-all-image: build-all-image
+	${CONTAINER_RUNTIME} push ${FULLSTACK_LABEL}:${TAG}
+	${CONTAINER_RUNTIME} push ${CLIENT_LABEL}:${TAG}
+	${CONTAINER_RUNTIME} push ${SERVER_LABEL}:${TAG} 
+	${CONTAINER_RUNTIME} push ${DATABASE_LABEL}:${TAG}

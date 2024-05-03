@@ -1,5 +1,7 @@
 FROM docker.io/mysql:latest as builder
 
+LABEL org.opencontainers.image.source=https://github.com/apscandy/cab230-react-express-app
+
 ENV MYSQL_ROOT_PASSWORD=root
 
 ENV MYSQL_USER=cab230

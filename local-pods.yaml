@@ -9,6 +9,7 @@ metadata:
   labels:
     app: cab230
   name: cab230
+
 spec:
   containers:
   - args:
@@ -25,12 +26,9 @@ spec:
         cpu: "200m"
     name: cab230-react
     ports:
-    - containerPort: 3306
-      hostPort: 3306
     - containerPort: 80
       hostPort: 8080
-    - containerPort: 3000
-      hostPort: 8081
+  
   - args:
     - node
     - index.js
@@ -43,6 +41,10 @@ spec:
         memory: "128Mi"
         cpu: "200m"
     name: cab230-express
+    ports:
+    - containerPort: 3000
+      hostPort: 8081
+  
   - args:
     - mysqld
     image: ghcr.io/apscandy/cab230-mysql-database:latest
@@ -54,9 +56,13 @@ spec:
         memory: "1024Mi"
         cpu: "200m"
     name: cab230-mysql-database
+    ports:
+    - containerPort: 3306
+      hostPort: 3306
     volumeMounts:
     - mountPath: /var/lib/mysql
       name: 3c87ff64ebfc92dc16091d12efb58cfa032b99458a9473ecd627ef6089acba9f-pvc
+  
   volumes:
   - name: 3c87ff64ebfc92dc16091d12efb58cfa032b99458a9473ecd627ef6089acba9f-pvc
     persistentVolumeClaim:
