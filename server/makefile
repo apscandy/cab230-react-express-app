@@ -29,7 +29,6 @@ stop-image:
 	${CONTAINER_RUNTIME} kill ${CONTAINER_NAME}
 	${CONTAINER_RUNTIME} rm ${CONTAINER_NAME}
 
-
 push-image: build-image
 	${CONTAINER_RUNTIME} push ${LABEL}:${TAG}
 

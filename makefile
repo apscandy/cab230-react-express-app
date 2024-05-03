@@ -1,6 +1,4 @@
-CONTAINER_RUNTIME=podman
 TAG=latest
-SBOM_FILE=sbom.json
 PODMAN_POD_NAME=cab230
 
 FULLSTACK_LABEL=ghcr.io/apscandy/cab230-react-express-app
@@ -15,35 +13,14 @@ SERVER_CONTAINER_NAME=cab230-express
 DATABASE_LABEL=ghcr.io/apscandy/cab230-mysql-database
 DATABASE_CONTAINER_NAME=cab230-mysql-database
 
-.DEFAULT_GOAL := build-image
+.DEFAULT_GOAL := build
 .PHONY: run build
 
-cve-check:
-	syft ${LABEL}:${TAG} -o cyclonedx-json=${SBOM_FILE}
-	grype sbom:${SBOM_FILE}
-	grype dir:.
-
-build-image: 
-	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f dockerfile
-	${CONTAINER_RUNTIME} image prune -f
-
-build-all-image: 
-	${CONTAINER_RUNTIME} build -t ${FULLSTACK_LABEL}:${TAG} -f dockerfile
-	${CONTAINER_RUNTIME} build -t ${CLIENT_LABEL}:${TAG} -f client/dockerfile
-	${CONTAINER_RUNTIME} build -t ${SERVER_LABEL}:${TAG} -f server/dockerfile
-	${CONTAINER_RUNTIME} build -t ${DATABASE_LABEL}:${TAG} -f database/dockerfile
-	${CONTAINER_RUNTIME} image prune -f
-
-run-image:
-	${CONTAINER_RUNTIME} run --name=${FULLSTACK_CONTAINER_NAME} -d -p 8080:3000/tcp ${FULLSTACK_LABEL}
-
-
-stop-image:
-	${CONTAINER_RUNTIME} kill ${CONTAINER_NAME}
-	${CONTAINER_RUNTIME} rm ${CONTAINER_NAME}
-
-push-image: build-image
-	${CONTAINER_RUNTIME} push ${LABEL}:${TAG}
+build: 
+	podman build -t ${CLIENT_LABEL}:${TAG} -f client/dockerfile
+	podman build -t ${SERVER_LABEL}:${TAG} -f server/dockerfile --build-arg=PORT=3000 --build-arg=STAGE=prod
+	podman build -t ${DATABASE_LABEL}:${TAG} -f database/dockerfile
+	podman image prune -f
 
 pod-run:
 	podman pod create --label ${PODMAN_POD_NAME} --name ${PODMAN_POD_NAME} -p 8080:80/tcp -p 8081:3000/tcp -p 3306:3306/tcp
@@ -56,7 +33,6 @@ pod-stop:
 	podman pod rm ${PODMAN_POD_NAME}
 
 push-all-image: build-all-image
-	${CONTAINER_RUNTIME} push ${FULLSTACK_LABEL}:${TAG}
-	${CONTAINER_RUNTIME} push ${CLIENT_LABEL}:${TAG}
-	${CONTAINER_RUNTIME} push ${SERVER_LABEL}:${TAG} 
-	${CONTAINER_RUNTIME} push ${DATABASE_LABEL}:${TAG}
+	podman push ${CLIENT_LABEL}:${TAG}
+	podman push ${SERVER_LABEL}:${TAG} 
+	podman push ${DATABASE_LABEL}:${TAG}
