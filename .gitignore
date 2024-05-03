@@ -23,5 +23,3 @@ dist-ssr
 *.sw?
 *.zip
 sbom.json
-report.md
-report.pdf
