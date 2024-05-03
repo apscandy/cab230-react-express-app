@@ -45,14 +45,11 @@ stop-image:
 push-image: build-image
 	${CONTAINER_RUNTIME} push ${LABEL}:${TAG}
 
-pod-run: build-all-image
-	podman pod create --label ${PODMAN_POD_NAME} --name ${PODMAN_POD_NAME} -p 8080:80 -p 8081:3000 -p 3306:3306
+pod-run:
+	podman pod create --label ${PODMAN_POD_NAME} --name ${PODMAN_POD_NAME} -p 8080:80/tcp -p 8081:3000/tcp -p 3306:3306/tcp
 	podman run --pod ${PODMAN_POD_NAME} --name=${CLIENT_CONTAINER_NAME} -d ${CLIENT_LABEL}
 	podman run --pod ${PODMAN_POD_NAME} --name=${SERVER_CONTAINER_NAME} -d ${SERVER_LABEL}
 	podman run --pod ${PODMAN_POD_NAME} --name=${DATABASE_CONTAINER_NAME} -d ${DATABASE_LABEL}
-
-pod-run-kube:
-	podman play kube local-pods.yaml
 
 pod-stop:
 	podman pod stop ${PODMAN_POD_NAME}
