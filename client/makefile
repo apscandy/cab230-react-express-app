@@ -1,6 +1,6 @@
-CONTAINER_RUNTIME=podman
 LABEL=ghcr.io/apscandy/cab230-react
 TAG=latest
+
 SBOM_FILE=sbom.json
 CONTAINER_NAME=cab230-react
 
@@ -14,7 +14,6 @@ CONTAINER_NAME=cab230-react
 cve-check:
 	syft ${LABEL}:${TAG} -o cyclonedx-json=${SBOM_FILE}
 	grype sbom:${SBOM_FILE}
-	grype dir:.
 
 build:
 	npm audit
@@ -25,19 +24,19 @@ preview: build
 	npm run preview
 
 build-image: build
-	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f dockerfile
+	podman build -t ${LABEL}:${TAG} -f dockerfile
 
 build-image-fresh:
-	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f build.dockerfile
-	${CONTAINER_RUNTIME} image prune -f
+	podman build -t ${LABEL}:${TAG} -f build.dockerfile
+	podman image prune -f
 
 run-image:
-	${CONTAINER_RUNTIME} run --name=${CONTAINER_NAME} -d -p 8080:80/tcp ${LABEL}
+	podman run --name=${CONTAINER_NAME} -d -p 8080:80/tcp ${LABEL}
 
 stop-image:
-	${CONTAINER_RUNTIME} kill ${CONTAINER_NAME}
-	${CONTAINER_RUNTIME} rm ${CONTAINER_NAME}
+	podman kill ${CONTAINER_NAME}
+	podman rm ${CONTAINER_NAME}
 
 push-image: build-image-fresh
-	${CONTAINER_RUNTIME} push ${LABEL}:${TAG}
+	podman push ${LABEL}:${TAG}
 

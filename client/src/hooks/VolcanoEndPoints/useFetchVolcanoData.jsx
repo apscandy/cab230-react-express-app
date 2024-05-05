@@ -33,10 +33,11 @@ export default function useFetchVolcanoData(id) {
       const json = await response.json();
       if (response.status === 401) {
         expiredSession();
+        setErrors(json.message);
         setData(json);
       }
       if (response.status === 400 || response.status === 404) {
-        setErrors(json.message);
+        setErrors("your session has expired you have been logged out");
         return;
       }
       if (response.status === 200) {
