@@ -1,4 +1,4 @@
-import { Authorization } from "../../App";
+import { Authorization } from "../App";
 import { useContext, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -30,8 +30,7 @@ export default function useAuth() {
   const logoutFunction = useCallback(() => {
     setIsLoggedIn(false);
     localStorage.removeItem("token");
-    return navigate("/");
-  }, [navigate, setIsLoggedIn]);
+  }, [setIsLoggedIn]);
 
   // revoke user session when called
   const expiredSession = useCallback(() => {

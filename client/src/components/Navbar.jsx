@@ -1,6 +1,6 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import useAuth from "../hooks/UserEndPoints/useAuth";
+import useAuth from "../hooks/useAuth";
 
 
 function NavBar() {

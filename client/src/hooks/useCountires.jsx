@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 export default function useCountry() {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState(JSON.parse(sessionStorage.getItem("countries"))||[]);
   const [errors, setErrors] = useState("");
 
   // get all counties from the remote api end point
@@ -17,6 +17,7 @@ export default function useCountry() {
       }
       if (response.status === 200) {
         setCountries(json);
+        sessionStorage.setItem("countries",JSON.stringify(json))
         return;
       }
     } catch {
@@ -25,7 +26,9 @@ export default function useCountry() {
   }, []);
 
   useEffect(() => {
-    fetchCountries();
+    if (!sessionStorage.getItem("countries")){
+        fetchCountries();
+    }
   }, [fetchCountries]);
 
   return { countries, errors };

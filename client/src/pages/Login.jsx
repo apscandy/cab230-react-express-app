@@ -1,7 +1,7 @@
 import NavBar from "../components/Navbar";
 import { Alert } from "react-bootstrap";
 import AuthForm from "../components/AuthForm";
-import useAuth from "../hooks/UserEndPoints/useAuth";
+import useAuth from "../hooks/useAuth";
 import Footer from "../components/Footer";
 
 function Login() {

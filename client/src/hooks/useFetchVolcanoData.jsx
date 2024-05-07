@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import useAuth from "../UserEndPoints/useAuth";
+import useAuth from "./useAuth";
 
 export default function useFetchVolcanoData(id) {
   const { isLoggedIn, expiredSession } = useAuth();
@@ -33,11 +33,12 @@ export default function useFetchVolcanoData(id) {
       const json = await response.json();
       if (response.status === 401) {
         expiredSession();
-        setErrors(json.message);
+        setErrors("your session has expired you have been logged out");
         setData(json);
+        return;
       }
       if (response.status === 400 || response.status === 404) {
-        setErrors("your session has expired you have been logged out");
+        setErrors(json.message);
         return;
       }
       if (response.status === 200) {

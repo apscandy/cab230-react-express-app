@@ -1,7 +1,7 @@
 import NavBar from "../components/Navbar";
 import { Alert } from "react-bootstrap";
-import useCountry from "../hooks/VolcanoEndPoints/useCountires";
-import useFetchVolcanos from "../hooks/VolcanoEndPoints/useFetchVolcanos";
+import useCountry from "../hooks/useCountires";
+import useFetchVolcanos from "../hooks/useFetchVolcanos";
 import Footer from "../components/Footer";
 import InputGroup from "react-bootstrap/InputGroup";
 import VolcanoTables from "../components/Tables";

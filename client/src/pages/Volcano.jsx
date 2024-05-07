@@ -1,7 +1,7 @@
 import NavBar from "../components/Navbar";
 import { useParams } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import useFetchVolcanoData from "../hooks/VolcanoEndPoints/useFetchVolcanoData";
+import useFetchVolcanoData from "../hooks/useFetchVolcanoData";
 import { Authorization } from "../App";
 import { useContext } from "react";
 import VolcanoMap from "../components/Map";
