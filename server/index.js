@@ -2,7 +2,8 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 import DataRouter from "./routes/data.js";
 import UserRouter from "./routes/user.js";
-import fs from "fs"
+import https from "https";
+import fs from "fs";
 const app = express();
 const PORT = process.env.PORT || 3000;
 const env = process.env.NODE_ENV || "development";
@@ -21,6 +22,13 @@ app.get("/*", function (req, res) {
 });
 
 import { getVolcanoByIDAuthenticated } from "./database/volcano.js";
-console.log(await getVolcanoByIDAuthenticated(69))
+console.log(await getVolcanoByIDAuthenticated(69));
 
-app.listen(PORT, () => console.log(`express is listening on port ${PORT}.`));
+const options = {
+  key: fs.readFileSync(`selfsigned.key`),
+  cert: fs.readFileSync(`selfsigned.crt`),
+};
+
+const server = https.createServer(options, app);
+server.listen(PORT, () => console.log(`express is listening on port ${PORT}.`));
+
