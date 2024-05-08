@@ -16,6 +16,12 @@ COPY . .
 
 COPY --from=frontend /var/www /app/dist
 
+RUN npm install pm2 -g
+
+COPY . .
+
 EXPOSE 3000
 
-CMD [ "node", "index.js"]
+EXPOSE 2080
+
+CMD ["pm2-runtime", "start", "index.js"]

@@ -8,6 +8,7 @@ openssl rsa -in private.pem -pubout -out public.pem
 openssl genrsa -out private.pem 4096 && openssl rsa -in private.pem -pubout -out public.pem
 ```
 
+make self signed certs with
 ```bash
 openssl genrsa -out certificates/key.pem   
 openssl genrsa req -new -key certificates/key.pem -out certificates/csr.pem

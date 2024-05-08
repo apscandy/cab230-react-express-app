@@ -1,4 +1,3 @@
-CONTAINER_RUNTIME=podman
 LABEL=ghcr.io/apscandy/cab230-express
 TAG=latest
 SBOM_FILE=sbom.json
@@ -20,17 +19,18 @@ add-frontend:
 	cp -r ../client/dist . 
 
 build-image: add-frontend
-	${CONTAINER_RUNTIME} build -t ${LABEL}:${TAG} -f dockerfile
+	podman build -t ${LABEL}:${TAG} -f dockerfile
+	podman image prune -f
 
 run-image:
-	${CONTAINER_RUNTIME} run --name=${CONTAINER_NAME} -d -p 8080:3000/tcp ${LABEL}
+	podman run --name=${CONTAINER_NAME} -d -p 8443:3000/tcp -p 8080:2080/tcp ${LABEL}
 
 stop-image:
-	${CONTAINER_RUNTIME} kill ${CONTAINER_NAME}
-	${CONTAINER_RUNTIME} rm ${CONTAINER_NAME}
+	podman kill ${CONTAINER_NAME}
+	podman rm ${CONTAINER_NAME}
 
 push-image: build-image
-	${CONTAINER_RUNTIME} push ${LABEL}:${TAG}
+	podman push ${LABEL}:${TAG}
 
 
 

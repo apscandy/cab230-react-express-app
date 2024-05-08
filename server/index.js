@@ -1,34 +1,48 @@
+import https from "https";
+import http from "http";
 import express from "express";
+
 import swaggerUi from "swagger-ui-express";
 import DataRouter from "./routes/data.js";
 import UserRouter from "./routes/user.js";
-import https from "https";
-import fs from "fs";
-const app = express();
-const PORT = process.env.PORT || 3000;
-const env = process.env.NODE_ENV || "development";
 
-const swagger = JSON.parse(fs.readFileSync(`swagger.json`));
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swagger));
+import fs from "fs";
+
+const PORT_HTTP = process.env.PORT_HTTP || 2080;
+const PORT_HTTPS = process.env.PORT_HTTPS || 3000;
+const APP_MODE = process.env.APP_MODE || "api";
+const app = express();
+
+// App mode is fullstack or api only
+if (APP_MODE !== "api" && APP_MODE !== "fullstack") {
+  throw new Error(
+    "invalid environment variable for APP_MODE, please set api or fullstack"
+  );
+}
 
 // adding routing
 app.use("/user", UserRouter);
 app.use("/", DataRouter);
 
 // add static files
-app.use(express.static("dist"));
-app.get("/*", function (req, res) {
-  res.sendFile("dist/index.html", { root: "." });
-});
+if (APP_MODE === "fullstack") {
+  app.use(express.static("dist"));
+  app.get("/*", function (req, res) {
+    res.sendFile("dist/index.html", { root: "." });
+  });
+}else{
+    const swagger = JSON.parse(fs.readFileSync(`swagger.json`));
+    app.use("/", swaggerUi.serve, swaggerUi.setup(swagger));
+}
 
-import { getVolcanoByIDAuthenticated } from "./database/volcano.js";
-console.log(await getVolcanoByIDAuthenticated(69));
-
-const options = {
-  key: fs.readFileSync(`selfsigned.key`),
-  cert: fs.readFileSync(`selfsigned.crt`),
-};
-
-const server = https.createServer(options, app);
-server.listen(PORT, () => console.log(`express is listening on port ${PORT}.`));
-
+// https://stackoverflow.com/questions/7907102/how-can-i-configure-expressjs-to-handle-both-http-and-https
+http.createServer(app.handle.bind(app)).listen(PORT_HTTP);
+https
+  .createServer(
+    {
+      key: fs.readFileSync(`certificates/key.pem`),
+      cert: fs.readFileSync(`certificates/cert.pem`),
+    },
+    app.handle.bind(app)
+  )
+  .listen(PORT_HTTPS);
