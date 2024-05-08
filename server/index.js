@@ -7,6 +7,7 @@ import DataRouter from "./routes/data.js";
 import UserRouter from "./routes/user.js";
 
 import fs from "fs";
+import { connectionPool } from "./database/database.js";
 
 const PORT_HTTP = process.env.PORT_HTTP || 2080;
 const PORT_HTTPS = process.env.PORT_HTTPS || 3000;
@@ -46,3 +47,11 @@ https
     app.handle.bind(app)
   )
   .listen(PORT_HTTPS);
+
+async function shutdownServer() {
+    await connectionPool.end()
+    process.exit()
+}
+process.on('SIGINT', await shutdownServer);
+process.on('SIGTERM',await shutdownServer);
+process.on('SIGQUIT', await shutdownServer);
