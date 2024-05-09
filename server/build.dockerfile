@@ -24,4 +24,4 @@ EXPOSE 3000
 
 EXPOSE 2080
 
-CMD ["pm2-runtime", "start", "index.js"]
+CMD ["pm2-runtime", "start", "prod.yml"]

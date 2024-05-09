@@ -1,8 +1,8 @@
 apps:
   - script: index.js
     name: 'api-app'
-    # instances: 4
-    # exec_mode: cluster
+    instances: "max"
+    exec_mode: cluster
     env:
       NODE_ENV: development
       APP_MODE: api

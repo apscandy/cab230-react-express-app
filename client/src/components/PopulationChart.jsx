@@ -28,23 +28,24 @@ function PopulationChart({ data }) {
 
   if (isLoggedIn) {
     barChartData = {
-      labels: ["5km", "10km", "30km", "100km"],
+      labels: ["5 km", "10 km", "30 km", "100 km"], 
       datasets: [
         {
-          label: "population",
+        label: "population", 
           data: [
             data.population_5km,
             data.population_10km,
             data.population_30km,
             data.population_100km,
           ],
-          backgoundColor: "rgba(155, 99,123,0.2)",
-          borderColor: "rgba(155, 99,123,0.2)",
+          backgroundColor: ["#C63D2F", "#E25E3E", "#FF9B50", "#FFBB5C"],
+          borderColor: ["#C63D2F", "#E25E3E", "#FF9B50", "#FFBB5C"],
           borderWidth: 1,
-        },
+        }
       ],
     };
   }
+
   return (
     <>
       <Bar data={barChartData} />

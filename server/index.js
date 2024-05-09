@@ -17,7 +17,7 @@ const app = express();
 // App mode is fullstack or api only
 if (APP_MODE !== "api" && APP_MODE !== "fullstack") {
   throw new Error(
-    "invalid environment variable for APP_MODE, please set api or fullstack"
+    "invalid environment variable for APP_MODE, please set `api` or `fullstack`"
   );
 }
 
@@ -26,14 +26,30 @@ app.use("/user", UserRouter);
 app.use("/", DataRouter);
 
 // add static files
-if (APP_MODE === "fullstack") {
-  app.use(express.static("dist"));
-  app.get("/*", function (req, res) {
-    res.sendFile("dist/index.html", { root: "." });
-  });
-}else{
+// if (APP_MODE === "fullstack") {
+//   app.use(express.static("dist"));
+//   app.get("/*", function (req, res) {
+//     res.sendFile("dist/index.html", { root: "." });
+//   });
+// } else {
+//   const swagger = JSON.parse(fs.readFileSync(`swagger.json`));
+//   app.use("/", swaggerUi.serve, swaggerUi.setup(swagger));
+// }
+
+switch (APP_MODE) {
+  case "api":
+    //load and serve swagger docs
     const swagger = JSON.parse(fs.readFileSync(`swagger.json`));
     app.use("/", swaggerUi.serve, swaggerUi.setup(swagger));
+    break;
+  case "fullstack":
+    // load and serve dist file
+    app.use(express.static("dist"));
+    app.get("/*", function (req, res) {
+      res.sendFile("dist/index.html", { root: "." });
+    });
+    break;
+  default:
 }
 
 // https://stackoverflow.com/questions/7907102/how-can-i-configure-expressjs-to-handle-both-http-and-https
@@ -49,9 +65,9 @@ https
   .listen(PORT_HTTPS);
 
 async function shutdownServer() {
-    await connectionPool.end()
-    process.exit()
+  await connectionPool.end();
+  process.exit();
 }
-process.on('SIGINT', await shutdownServer);
-process.on('SIGTERM',await shutdownServer);
-process.on('SIGQUIT', await shutdownServer);
+process.on("SIGINT", await shutdownServer);
+process.on("SIGTERM", await shutdownServer);
+process.on("SIGQUIT", await shutdownServer);

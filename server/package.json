@@ -6,7 +6,10 @@
   "type": "module",
   "scripts": {
     "server": "node --env-file .database.env --env-file .server.env",
-    "dev": "node --env-file .database.env --env-file .server.env --watch index.js"
+    "dev": "node --env-file .database.env --env-file .server.env --watch index.js",
+    "deployment": "pm2 start prod.yml",
+    "stopDeployment": "pm2 stop prod.yml"
+    
   },
   "author": "Andrew. A. Clarke.",
   "license": "ISC",
