@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "CAB230-assignment-3",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "server": "node --env-file .database.env --env-file .server.env",
-    "dev": "node --env-file .database.env --env-file .server.env --watch index.js",
+    "build": "tsc",
+    "server": "node --env-file .database.env --env-file .server.env build/index.js",
+    "dev": "npx ts-node src/index.ts",
     "deployment": "pm2 start prod.yml",
     "stopDeployment": "pm2 stop prod.yml"
-    
   },
   "author": "Andrew. A. Clarke.",
   "license": "ISC",
@@ -18,7 +17,16 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
     "mysql2": "^3.9.7",
     "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.12.11",
+    "@types/swagger-ui-express": "^4.1.6",
+    "typescript": "^5.4.5"
   }
 }
