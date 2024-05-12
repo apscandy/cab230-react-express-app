@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "pack": "webpack",
     "server": "node --env-file .database.env --env-file .server.env build/index.js",
     "dev": "npx ts-node src/index.ts",
     "deployment": "pm2 start prod.yml",
@@ -27,6 +28,9 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.11",
     "@types/swagger-ui-express": "^4.1.6",
-    "typescript": "^5.4.5"
+    "@webpack-cli/generators": "^3.0.7",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   }
 }
