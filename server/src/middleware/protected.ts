@@ -2,9 +2,9 @@ import {Request, Response, NextFunction} from "express"
 import jwt from "jsonwebtoken";
 
 
-export async function isAuthenticated(req: Request, res: Response, next: NextFunction) {
-    const header = req.headers["authorization"];
-    const token = header?.split(' ')[1]
+export async function isAuthenticated(req: Request, res: Response, next: NextFunction): Promise<void> {
+    const header = req.headers["authorization"] as string;
+    const token = header?.split(' ')[1] as string;
     jwt.verify(token!, process.env.TOKEN_SECRET!, (error)=>{
         if(error){
             res.locals.authenticatedToken = null;

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "server": "node --env-file .database.env --env-file .server.env build/index.js",
+    "server": " NODE_ENV=development node --env-file .database.env --env-file .server.env build/index.js",
     "dev": "npx ts-node src/index.ts",
     "deployment": "pm2 start prod.yml",
     "stopDeployment": "pm2 stop prod.yml"

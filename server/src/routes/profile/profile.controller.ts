@@ -1,12 +1,12 @@
 import {Request, Response} from "express";
 
-export async function getProfile(req: Request, res: Response){
+export async function getProfile(req: Request, res: Response): Promise<void>{
     const auth = res.locals.authenticated;
     res.sendStatus(200);
 
 }
 
-export async function putProfile(req: Request, res: Response){
+export async function putProfile(req: Request, res: Response): Promise<void>{
     const auth = res.locals.authenticated;
     res.sendStatus(200);
 }
