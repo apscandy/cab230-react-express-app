@@ -1,5 +1,5 @@
 apps:
-  - script: build/index.js
+  - script: dist/bundle.js
     name: 'api-app'
     instances: "max"
     exec_mode: cluster
