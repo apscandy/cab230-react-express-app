@@ -2,7 +2,7 @@ import swaggerUi from "swagger-ui-express";
 import { Express } from "express";
 import fs from "node:fs";
 
-export default function (app: Express) {
+export default function swagger (app: Express) {
     app.use("/",
         swaggerUi.serve,
         // @ts-ignore

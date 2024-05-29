@@ -10,14 +10,16 @@ module.exports = {
         filename: 'bundle.js'
     },
     externals: {
-        // all settings for knexjs
         'sqlite3': 'commonjs sqlite3',
         'pg': 'commonjs pg',
         'pg-query-stream': 'commonjs pg-query-stream',
         'oracledb': 'commonjs oracledb',
         'mysql': 'commonjs mysql',
         'tedious': 'commonjs tedious',
-        'better-sqlite3': 'commonjs better-sqlite3'
+        'better-sqlite3': 'commonjs better-sqlite3',
+        'nock': 'commonjs nock',
+        'aws-sdk': 'commonjs aws-sdk',
+        'mock-aws-s3': 'commonjs mock-aws-s3'
     },
     optimization: {
         minimize: true

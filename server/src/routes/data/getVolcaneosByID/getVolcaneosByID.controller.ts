@@ -4,7 +4,6 @@ import { Request, Response } from "express";
 export async function getVolcanoByID(req: Request, res: Response): Promise<void> {
     const pathId = req.params.id.trim() as unknown as string;
     const pathIdnumber = parseInt(pathId)
-    console.log(req.params)
     if (isNaN(pathIdnumber)) {
         res.status(404).json({
             "error": true,

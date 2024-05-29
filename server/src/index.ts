@@ -3,16 +3,16 @@ import https from "node:https";
 import http from "node:http"
 import fs from "node:fs";
 import cors from "cors";
+import helmet from "helmet";
 import routes from "./routes";
 
 const app: Express = express();
 const portHttps: number = 3000;
-const portHttp: number = 2080;
+const portHttp: number = 3001;
 
 app.use(express.json());
-// @ts-ignore
-app.use(cors("*"));
-
+app.use(cors());
+app.use(helmet());
 routes(app)
 
 // @ts-ignore
