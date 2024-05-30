@@ -1,0 +1,19 @@
+node_modules
+
+# React
+/.pnp
+.pnp.js
+
+# IDE
+.idea
+.vscode
+
+# Miscellaneous
+.DS_Store
+*.log
+
+*.md
+
+.gitgnore
+dist
+.server.env

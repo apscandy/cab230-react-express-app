@@ -3,7 +3,7 @@ import { Express } from "express";
 import fs from "node:fs";
 
 export default function swagger (app: Express) {
-    app.get("/",
+    app.use("/",
         swaggerUi.serve,
         // @ts-ignore
         swaggerUi.setup(JSON.parse(fs.readFileSync(`swagger.json`)))

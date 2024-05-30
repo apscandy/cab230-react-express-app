@@ -24,10 +24,7 @@ export async function register(req: Request, res: Response): Promise<void>{
         })
         return;
     } catch (error) {
-        res.status(500).json({
-            "error": true,
-            "message":  "server error, please try again later"
-        })
+        res.status(500)
         return;
     }
 }

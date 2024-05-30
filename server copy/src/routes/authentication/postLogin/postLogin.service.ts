@@ -17,6 +17,7 @@ export async function getUser(email: string): Promise<user[]> {
         console.error(`error ${error} ${email}`, "registerUser")
         return await [];
     }
+
 }
 
 export async function verifyPassword(plainTextPassword: string, hashedPassword: string): Promise<boolean> {

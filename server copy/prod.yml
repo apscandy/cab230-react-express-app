@@ -1,5 +1,5 @@
 apps:
-  - script: build/index.js
+  - script: dist/bundle.js
     name: 'api-app'
     instances: "max"
     exec_mode: cluster
@@ -10,6 +10,6 @@ apps:
       PORT_HTTPS: 3000
       MYSQL_HOST: 127.0.0.1
       MYSQL_USER: root
-      MYSQL_PASSWORD: Cab230!
+      MYSQL_PASSWORD: root
       MYSQL_DATABASE: volcanoes
 

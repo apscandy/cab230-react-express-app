@@ -26,6 +26,7 @@ export async function isAuthenticated(req: Request, res: Response, next: NextFun
     }
     try {
         const payload = await jwt.verify(token!, process.env.TOKEN_SECRET || "Cab230!"!) as jwtPayloadData
+        // @ts-ignore
         if(payload.exp <  Math.floor(Date.now() / 1000)){
             res.status(401).json({
                 "error": true,
@@ -34,6 +35,7 @@ export async function isAuthenticated(req: Request, res: Response, next: NextFun
             return;
         }
         else{
+            // @ts-ignore
             res.locals.authenticatedEmail = payload.email;
             res.locals.authenticatedToken = token;
             res.locals.authenticated = true;
