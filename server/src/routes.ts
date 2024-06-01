@@ -6,8 +6,8 @@ import swagger from "./routes/swagger/swagger.controller"
 import profileRouter from "./routes/profile/profileRouter"
 
 export default function (app: Express) {
-    dataRouters(app);
-    adminRouter(app);
+    dataRouters(app)
+    adminRouter(app)
     authRouter(app)
     profileRouter(app)
     swagger(app)
