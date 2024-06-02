@@ -19,7 +19,8 @@ module.exports = {
         'better-sqlite3': 'commonjs better-sqlite3',
         'nock': 'commonjs nock',
         'aws-sdk': 'commonjs aws-sdk',
-        'mock-aws-s3': 'commonjs mock-aws-s3'
+        'mock-aws-s3': 'commonjs mock-aws-s3',
+        'bcrypt': 'commonjs bcrypt'
     },
     optimization: {
         minimize: true

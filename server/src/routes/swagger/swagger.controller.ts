@@ -2,10 +2,10 @@ import swaggerUi from "swagger-ui-express";
 import { Express } from "express";
 import fs from "node:fs";
 
-export default function swagger (app: Express) {
+export default function swagger(app: Express) {
+    app.use(swaggerUi.serve)
     app.get("/",
-        swaggerUi.serve,
         // @ts-ignore
-        swaggerUi.setup(JSON.parse(fs.readFileSync(`swagger.json`)))
+        swaggerUi.setup(JSON.parse(fs.readFileSync('swagger.json', 'utf8')))
     );
 }
