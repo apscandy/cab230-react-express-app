@@ -17,13 +17,11 @@ routes(app)
 
 // @ts-ignore
 http.createServer(app.handle.bind(app)).listen(portHttp);
-https
-    .createServer(
-        {
-            key: fs.readFileSync(`certificates/key.pem`),
-            cert: fs.readFileSync(`certificates/cert.pem`),
-        },
-        // @ts-ignore
-        app.handle.bind(app)
-    )
-    .listen(portHttps);
+https.createServer(
+    { 
+        key: fs.readFileSync(`certificates/key.pem`), 
+        cert: fs.readFileSync(`certificates/cert.pem`), 
+    },
+    // @ts-ignore
+    app.handle.bind(app)
+).listen(portHttps);

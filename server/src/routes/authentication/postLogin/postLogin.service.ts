@@ -35,7 +35,7 @@ export async function generateToken(email: string, expires_in: number) {
             iat: Math.floor(Date.now() / 1000),
             exp: Math.floor(Date.now() / 1000) + expires_in
         }
-        const token = await jwt.sign(payload, "Cab230!")
+        const token = await jwt.sign(payload, process.env.TOKEN_SECRET ||"Cab230!")
         return token;
 
     } catch (error) {
